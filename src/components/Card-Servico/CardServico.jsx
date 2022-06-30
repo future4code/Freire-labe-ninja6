@@ -9,7 +9,7 @@ import { removeFromCart } from "../../services/ConexoesApi";
 
 export default class CardServico extends React.Component {
     state = {
-        servicos: getAllJobs().then()
+        servicos: []
     }
     
     componentDidMount = () => {
