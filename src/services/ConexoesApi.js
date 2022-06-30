@@ -28,3 +28,29 @@ export async function getAllJobs(){
     }
 }
 
+export const addToCart = (id) => {
+    const body = {
+        taken: true
+    }
+    axios.post(`${url}/jobs/${id}`, body, auth)
+    .then(() => {        
+        alert(`Adicionado ao carrinho`)
+    })
+    .catch(() => {
+        alert('Erro ao adicionar serviço ao carrinho')
+    })
+}
+
+export const removeFromCart = (id) => {
+    const body = {
+        taken: false
+    }
+    axios.post(`${url}/jobs/${id}`, body, auth)
+    .then(() => {        
+        alert(`Removido com sucesso`) 
+    })
+    .catch(() => {
+        alert('Erro ao remover serviço ao carrinho')
+    })
+}
+

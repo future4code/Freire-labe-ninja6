@@ -4,10 +4,12 @@ import axios from "axios";
 import { Card } from "./styled";
 import { CardContainer } from "./styled";
 import { getAllJobs } from "../../services/ConexoesApi";
+import { addToCart } from "../../services/ConexoesApi";
+import { removeFromCart } from "../../services/ConexoesApi";
 
 export default class CardServico extends React.Component {
     state = {
-        servicos: []
+        servicos: getAllJobs().then()
     }
     
     componentDidMount = () => {
@@ -15,6 +17,7 @@ export default class CardServico extends React.Component {
             this.setState({servicos: result})
         })                
     }
+
 
     pegarServiços
     render(){
@@ -26,14 +29,18 @@ export default class CardServico extends React.Component {
 
             today = dd + '/' + mm + '/' + yyyy;
             
-            console.log(servico.dueDate);
             return(
                 <Card key={servico.id}>
                     <p>{servico.title}</p>
                     <p>Prazo: {today}, Preço: R${servico.price}</p>
                     <div>
-                        <button>Detalhes</button>
-                        <button>Adicionar</button>
+                        <button
+                        onClick={() => {removeFromCart(servico.id)}}
+                        >Detalhes</button>
+                        <button 
+                        onClick={() => addToCart(servico.id)}
+                        disabled={servico.taken}
+                        >Adicionar</button>
                     </div>
                 </Card>
             )
