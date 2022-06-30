@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import { MultiSelect } from 'react-multi-select-component';
+import { createJob } from '../../services/ConexoesApi';
 
 
 export default class Inscricao extends React.Component{
@@ -53,9 +55,23 @@ export default class Inscricao extends React.Component{
 //         )
 //   }
 // };
+criarNinja = () => {
+  createJob()
+}
 
 render(){
-   
+    
+    const options = [
+      {
+        label: "Cartão", value: "cartao"
+      },
+      {
+        label: "Pix", value: "pix"
+      }
+    ]
+    const Example = () => {
+      const [selected, setSelected] = useState([]);
+
     return(
         <center>
         <form action="">
@@ -77,23 +93,31 @@ render(){
         Pix <input type="checkbox" />
         <br /> 
         <label for="pagamento">Forma de pagamento:</label>
-        <input list="pagamentos" name="pagamento" id="pagamento" />
-        <datalist id="pagamentos" >
-            <option id='1' value="Cartão de Credito" />
-            <option id='2' value="Cartão de Débito" />
-            <option id='3' value="PayPal" />
-            <option id='4' value="Boleto" />
-            <option id='5' value="Pix" />
-        </datalist>
+        {/* <input list="pagamentos" name="pagamento" id="pagamento" /> */}
+        {/* <select multiple id="pagamentos" >
+            <option id='1' value="Cartão de Credito">Cartão de Credito</option>
+            <option id='2' value="Cartão de Débito">Cartão de Débito</option>
+            <option id='3' value="PayPal">PayPal</option>
+            <option id='4' value="Boleto" >Boleto</option>
+            <option id='5' value="Pix" >Pix</option>
+        </select> */}
+        <MultiSelect
+        options={options}
+        value={selected}
+        onChange={setSelected}
+        labelledBy="Select"
+        />
         <button onClick={this.addPgto}>Enviar</button>
         <br />
         <input type="date" />
         <br />
-        <button>Cadastrar Serviço</button>
+        
         </form>
+        <button onClick={() => this.criarNinja()}>Cadastrar Serviço</button>
         </center>
         
 
     )
 }
 } 
+}

@@ -18,8 +18,13 @@ export default class CardServico extends React.Component {
         })                
     }
 
+    adicionarAoCarrinho = (id) => {
+        addToCart(id)
+        getAllJobs().then((result) => {
+            this.setState({servicos: result})
+        })
+    }
 
-    pegarServiços
     render(){
         const servicos = this.state.servicos.map(servico => {
             let today = new Date(servico.dueDate);
@@ -34,11 +39,9 @@ export default class CardServico extends React.Component {
                     <p>{servico.title}</p>
                     <p>Prazo: {today}, Preço: R${servico.price}</p>
                     <div>
-                        <button
-                        onClick={() => {removeFromCart(servico.id)}}
-                        >Detalhes</button>
+                        <button>Detalhes</button>
                         <button 
-                        onClick={() => addToCart(servico.id)}
+                        onClick={() => {this.adicionarAoCarrinho(servico.id)}}
                         disabled={servico.taken}
                         >Adicionar</button>
                     </div>

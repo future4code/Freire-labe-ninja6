@@ -18,6 +18,32 @@ export const auth = {
 //     })
 // }
 
+export const createJob = () => {
+    // const body = {
+    //     title: title,
+    //     description: description,
+    //     price: price,
+    //     paymentMethods: payment,
+    //     dueDate: date
+    // }
+    const body = {
+        title: "Back end",
+        description: "Faço teu site",
+        price: 50,
+        paymentMethods: ["Cartão de Crédito", "Pix"],
+        dueDate: "2023-12-30"
+    }
+    axios
+    .post(`${url}/jobs`, body, auth)
+    .then(() => {
+        alert("Parabéns! Você agora é um ninja!")
+    })
+    .catch((error) => {
+
+        console.log(error)
+    })
+}
+
 export async function getAllJobs(){
     try {
         const response = await axios
