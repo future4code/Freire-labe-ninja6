@@ -19,10 +19,12 @@ export default class CardServico extends React.Component {
     }
 
     adicionarAoCarrinho = (id) => {
-        addToCart(id)
-        getAllJobs().then((result) => {
+        addToCart(id).then(() => {
+            getAllJobs().then((result) => {
             this.setState({servicos: result})
+            })
         })
+        
     }
 
     render(){

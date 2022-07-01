@@ -69,8 +69,6 @@ render(){
         label: "Pix", value: "pix"
       }
     ]
-    const Example = () => {
-      const [selected, setSelected] = useState([]);
 
     return(
         <center>
@@ -101,12 +99,6 @@ render(){
             <option id='4' value="Boleto" >Boleto</option>
             <option id='5' value="Pix" >Pix</option>
         </select> */}
-        <MultiSelect
-        options={options}
-        value={selected}
-        onChange={setSelected}
-        labelledBy="Select"
-        />
         <button onClick={this.addPgto}>Enviar</button>
         <br />
         <input type="date" />
@@ -120,4 +112,3 @@ render(){
     )
 }
 } 
-}
