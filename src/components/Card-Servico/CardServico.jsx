@@ -21,6 +21,14 @@ export default class CardServico extends React.Component {
   componentDidMount = () => {
     getAllJobs(this.saveJobs);
   };
+    adicionarAoCarrinho = (id) => {
+        addToCart(id).then(() => {
+            getAllJobs().then((result) => {
+            this.setState({servicos: result})
+            })
+        })
+        
+    }
 
   saveJobs = (data) => {
     this.setState({ servicos: data });
