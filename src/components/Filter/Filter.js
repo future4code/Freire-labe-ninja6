@@ -1,28 +1,38 @@
 import React from "react";
-import { Input, Select } from "./styled";
+import { Input, Select, Div } from "./styled";
+import TextField from "@mui/material/TextField";
 
 export default class Filter extends React.Component {
   render() {
     return (
-      <div className="App">
-        <Input
+      <Div className="App">
+        <TextField
+          id="outlined-basic"
+          label="valor mínimo"
+          variant="outlined"
           type="number"
+          size="small"
           onChange={this.props.onChangeMinValue}
           value={this.props.minValue}
-          placeholder="valor mínimo"
         />
-        <Input
+        <TextField
           type="number"
+          size="small"
           onChange={this.props.onChangeMaxValue}
           value={this.props.maxValue}
-          placeholder="valor máximo"
+          id="outlined-basic"
+          label="valor máximo"
+          variant="outlined"
         />
 
-        <Input
+        <TextField
           type="text"
+          size="small"
           onChange={this.props.onChangeSearchProd}
           value={this.props.searchProd}
-          placeholder="buscar"
+          id="outlined-basic"
+          label="Buscar"
+          variant="outlined"
         />
         <Select
           name=""
@@ -35,7 +45,7 @@ export default class Filter extends React.Component {
           <option value={"Decrescente"}>Decrescente</option>
           <option value={"Prazo"}>Prazo</option>
         </Select>
-      </div>
+      </Div>
     );
   }
 }
