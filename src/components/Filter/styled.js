@@ -28,3 +28,8 @@ export const Select = styled.select`
     border-color: lightsalmon;
   }
 `;
+
+export const Div = styled.div`
+  margin-top: 10px;
+  display: flex;
+`;
