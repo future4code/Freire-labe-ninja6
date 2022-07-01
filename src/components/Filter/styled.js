@@ -30,6 +30,8 @@ export const Select = styled.select`
 `;
 
 export const Div = styled.div`
-  margin-top: 10px;
   display: flex;
+  margin-bottom: 20px;
+  justify-content: center;
+  margin-top: 10px;
 `;

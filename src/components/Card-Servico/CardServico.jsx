@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 
 
 import Filter from "../Filter/Filter";
@@ -18,21 +17,20 @@ export default class CardServico extends React.Component {
     order: "Título"
   };
 
-  componentDidMount = () => {
-    getAllJobs(this.saveJobs);
-  };
+    componentDidMount = () => {
+    getAllJobs().then((result) => {
+        this.setState({servicos: result})
+        });
+    };
+  
     adicionarAoCarrinho = (id) => {
-        addToCart(id).then(() => {
-            getAllJobs().then((result) => {
-            this.setState({servicos: result})
-            })
+      addToCart(id).then(() => {
+        getAllJobs().then((result) => {
+        this.setState({servicos: result})
         })
+      })
         
     }
-
-  saveJobs = (data) => {
-    this.setState({ servicos: data });
-  };
 
   onChangeMinValue = (e) => {
     this.setState({ minValue: e.target.value });
@@ -47,9 +45,6 @@ export default class CardServico extends React.Component {
     this.setState({ order: e.target.value });
   };
 
-  adicionarAoCarrinho = (id) => {
-    addToCart(id);
-  };
   removerDoCarrinho = (id) => {
     removeFromCart(id);
   };
@@ -115,9 +110,8 @@ export default class CardServico extends React.Component {
       );
     });
     return (
-      <div>
-        <Div>
-        <Filter
+      <Div>
+          <Filter
           minValue={this.state.minValue}
           maxValue={this.state.maxValue}
           searchProd={this.state.searchProd}
@@ -127,9 +121,9 @@ export default class CardServico extends React.Component {
           onChangeSearchProd={this.onChangeSearchProd}
           onChangeOrder={this.onChangeOrder}
         />
-        </Div>
+        
         <CardContainer>{servicos}</CardContainer>
-      </div>
+      </Div>
     );
   }
 }

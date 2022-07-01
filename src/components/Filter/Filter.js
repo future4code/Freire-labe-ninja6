@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 export default class Filter extends React.Component {
   render() {
     return (
-      <Div className="App">
+      <Div>
         <TextField
           id="outlined-basic"
           label="valor mínimo"
