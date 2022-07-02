@@ -8,7 +8,7 @@ export const BalaoCarrinho = styled.div`
   right: 20px;
   left: auto;
   min-height: 100px;
-  width: 270px;
+  min-width: 260px;
   background-color: #e0e0e0;
   border-radius: 10px;
   border: 1px solid black;
@@ -42,7 +42,7 @@ export const CardCarrinho = styled.div`
   justify-content: space-between;
   align-items: center;
   border: 1px solid black;
-  width: 100%;
+  width: 92%;
   padding: 10px;
   margin-bottom: 5px;
   & > div {
