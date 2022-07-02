@@ -26,8 +26,9 @@ export default class CardServico extends React.Component {
     adicionarAoCarrinho = (id) => {
       addToCart(id).then(() => {
         getAllJobs().then((result) => {
-        this.setState({servicos: result})
+          this.setState({servicos: result})
         })
+        this.props.cardAdicionou() // Esse props aqui que também ajuda na mudança
       })
         
     }
@@ -49,7 +50,19 @@ export default class CardServico extends React.Component {
     removeFromCart(id);
   };
 
+  // Essa parte do código mais a passagem de outro props fazem o 
+  // cardServico atualizar quando o carrinho remove um serviço
+  componentDidUpdate() {
+    if (this.props.atualizaComponente) {
+      getAllJobs().then((result) => {
+          this.setState({servicos: result})
+          this.props.concluido()
+        })
+    }
+  }
+
   render() {
+    console.log("loop")
     const filteredJobs = this.state.servicos
       .filter((job) => {
         let minVal = this.state.minValue ? this.state.minValue : -Infinity;
@@ -90,11 +103,7 @@ export default class CardServico extends React.Component {
             Prazo: {today}, Preço: R${servico.price}
           </p>
           <div>
-            <button
-              onClick={() => {
-                this.removerDoCarrinho(servico.id);
-              }}
-            >
+            <button>
               Detalhes
             </button>
             <button

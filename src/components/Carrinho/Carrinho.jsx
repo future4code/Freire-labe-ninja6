@@ -1,3 +1,7 @@
+import React from "react";
+import { getAllJobs, removeFromCart } from "../../services/ConexoesApi";
+import { BalaoCarrinho, CardCarrinho, TituloCarrinho, BotaoEsvaziar, FinalCarrinho } from "./styles";
+
 {/* 
 
 Fiz o componente com base nesse código comentado abaixo. 
@@ -43,32 +47,9 @@ export default class App extends React.Component {
   }
 }
  */}
-
-import React from "react";
-import axios from "axios";
-import { BalaoCarrinho, CardCarrinho, TituloCarrinho, BotaoEsvaziar, FinalCarrinho } from "./styles";
-
 export default class Carrinho extends React.Component {
   state = {
-    // Vai começar vazia. Os itens só estão aqui como exemplo
-    itensCarrinho: [
-      {
-        nome: "Bombeiro Hidráulico",
-        preco: 100
-      },
-      {
-        nome: "Pedreiro",
-        preco: 150
-      },
-      {
-        nome: "Eletricista",
-        preco: 90
-      },
-      {
-        nome: "Jardinagem",
-        preco: 200
-      }
-    ]
+    itensCarrinho: []
   };
 
   adicionaItemCarrinho = (id) => {
@@ -81,12 +62,15 @@ export default class Carrinho extends React.Component {
   excluiItemCarrinho = (id) => {
     if (window.confirm("Tem certeza que deseja remover esse item?")) {
       // O item deve ser excluído pelo ID, consertar quando conectar API
-      const listaAtualizada = this.state.itensCarrinho.filter(
-        (item, indice) => {
-          return indice !== id;
-        }
-      );
-      this.setState({ itensCarrinho: listaAtualizada });
+      removeFromCart(id).then(() => {
+        getAllJobs().then((result) => {
+          const itensAdicionados = result.filter((item) => {
+            return item.taken
+          })
+          this.setState({ itensCarrinho: itensAdicionados });
+          this.props.carrinhoExcluiu();
+        });
+      });
     }
   };
 
@@ -101,22 +85,45 @@ export default class Carrinho extends React.Component {
     alert("Agradecemos a preferência! Em breve entraremos em contato!");
   };
 
+  componentDidMount() {
+    getAllJobs().then((result) => {
+      const itensAdicionados = result.filter((item) => {
+        return item.taken
+      })
+      this.setState({ itensCarrinho: itensAdicionados });
+    });
+  }
+
+  componentDidUpdate() {
+    if (this.props.atualizaComponente) {
+      getAllJobs().then((result) => {
+        const itensAdicionados = result.filter((item) => {
+          return item.taken
+        })
+        this.setState({ itensCarrinho: itensAdicionados });
+        this.props.concluido()
+      })
+    }
+  }
+
   render() {
+    console.log(this.state.itensCarrinho)
     let itensExibidos = "";
     if (this.state.itensCarrinho.length !== 0) {
-      itensExibidos = this.state.itensCarrinho.map((item, indice) => {
-        return (
-          <CardCarrinho key={indice}>
-            <div>
-              <span>{item.nome}</span>
-              <span>R$ {item.preco.toFixed(2)}</span>
-            </div>
-            <button onClick={() => this.excluiItemCarrinho(indice)}>
-              Excluir
-            </button>
-          </CardCarrinho>
-        );
-      });
+      itensExibidos = this.state.itensCarrinho
+        .map((item) => {
+          return (
+            <CardCarrinho key={item.id}>
+              <div>
+                <span>{item.title}</span>
+                <span>R$ {item.price.toFixed(2).replace(".", ",")}</span>
+              </div>
+              <button onClick={() => this.excluiItemCarrinho(item.id)}>
+                Excluir
+              </button>
+            </CardCarrinho>
+          );
+        });
     } else {
       itensExibidos = <h2>{"Carrinho vazio :("}</h2>;
     }
@@ -125,7 +132,7 @@ export default class Carrinho extends React.Component {
 
     if (this.state.itensCarrinho) {
       for (let item of this.state.itensCarrinho) {
-        valorTotal += item.preco;
+        valorTotal += item.price;
       }
     }
 
@@ -146,7 +153,7 @@ export default class Carrinho extends React.Component {
           Esvaziar Carrinho
         </BotaoEsvaziar>
         <FinalCarrinho>
-          <h3>Total: {valorTotal.toFixed(2)}</h3>
+          <h3>Total: R$ {valorTotal.toFixed(2).replace(".", ",")}</h3>
           <button
             onClick={this.contratarServico}
             disabled={this.state.itensCarrinho.length === 0}
