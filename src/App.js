@@ -40,10 +40,10 @@ export default class App extends React.Component {
     render() {
         return (
             <div>
-                {/* <>
-                <HeaderEFooter/>
+                <>
+                {/* <HeaderEFooter/> */}
                 <Home/>
-                </> */}
+                </>
 
                 {/* CÓDIGO TESTE COM O CARRINHO */}
                 <DivBotao>
@@ -58,7 +58,9 @@ export default class App extends React.Component {
                     />
                 </DivBotao>
                 <hr />
-                <CardServico cardAdicionou={this.atualizaCarrinho} atualizaComponente={this.state.atualizaComponente} concluido={this.concluido} />
+                <CardServico cardAdicionou={this.atualizaCarrinho} 
+                atualizaComponente={this.state.atualizaComponente}
+                 concluido={this.concluido} />
                 {/* ATÉ AQUI */}
 
                 {/* <CardServico/> */}

@@ -11,7 +11,6 @@ export default class Inscricao extends React.Component{
         inputPgto: '',
         formaPgto: [],
         inputPrazo: '',
-
     };
 
     pegarValorInputTitulo = (event) =>
