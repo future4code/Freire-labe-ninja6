@@ -5,7 +5,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 export default function IconButtons() {
   return (
-    <Stack  direction="row" spacing={1}>
+    <Stack direction="row" spacing={1}>
       <IconButton color="primary" aria-label="add to shopping cart">
         <AddShoppingCartIcon />
       </IconButton>
