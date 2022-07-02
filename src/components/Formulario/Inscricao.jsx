@@ -26,16 +26,8 @@ export default class Inscricao extends React.Component{
     handleInputPrazo = (event) =>
     this.setState({ inputPrazo: event.target.value });
 
-      
-    deletarPgto = (item) => {
-    const pgtoFiltrados = this.state.formaPgto.filter((id) => {
-      return id !== item;
-    })
-    this.setState({ formaPgto: pgtoFiltrados });
-  };
-
-  
-selectOption = (item) => {
+    
+  selectOption = (item) => {
   const novaListaPgto = item.map(item =>{
     return item.value
   })
@@ -44,12 +36,6 @@ selectOption = (item) => {
   console.log(this.state.formaPgto)
 }
 
-deletarPgto = (value) => {
-  const listaPgtoFiltrada = this.state.formaPgto.filter((item) => {
-    return item !== value;
-  });
-  this.setState({ formaPgto: listaPgtoFiltrada });
-};
 
 criarNinja = () => {
   createJob()
@@ -57,6 +43,7 @@ criarNinja = () => {
 
 
 render(){
+
   const options = [
     {
       label: "Cartão de Credito", value: "Cartão de Credito"
@@ -75,23 +62,8 @@ render(){
     }
   ];
 
-  const renderizaPgto = this.state.formaPgto.map((item) => {
-    return (
-      <div>
-        <p>{item}
-        <button 
-        onClick={() => this.deletarPgto(item)} >
-          x
-        </button>
-        </p>
-      </div>
-    );
-  });
-  
-
     return(
-        <center>
-        
+       <center>
         <h2>Cadastre o seu serviço</h2>
         <input type="text" 
         placeholder='Título' 

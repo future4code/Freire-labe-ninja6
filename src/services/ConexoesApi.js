@@ -54,29 +54,40 @@ export async function getAllJobs(){
     }
 }
 
-export const addToCart = (id) => {
+export async function addToCart(id){
     const body = {
         taken: true
     }
-    axios.post(`${url}/jobs/${id}`, body, auth)
-    .then(() => {        
-        alert(`Adicionado ao carrinho`)
-    })
-    .catch(() => {
-        alert('Erro ao adicionar serviço ao carrinho')
-    })
+    try {
+        await axios
+        .post(`${url}/jobs/${id}`, body, auth)
+        alert('Adicionado')
+    } catch (error) {
+        alert('Erro')
+    }
 }
 
-export const removeFromCart = (id) => {
+export async function removeFromCart(id) {
     const body = {
-        taken: false
+      taken: false
+    };
+    try {
+      await axios.post(`${url}/jobs/${id}`, body, auth);
+    } catch {
+      alert("Erro ao remover serviço ao carrinho");
     }
-    axios.post(`${url}/jobs/${id}`, body, auth)
-    .then(() => {        
-        alert(`Removido com sucesso`) 
-    })
-    .catch(() => {
-        alert('Erro ao remover serviço ao carrinho')
-    })
-}
+  }
+
+// export const removeFromCart = (id) => {
+//     const body = {
+//         taken: false
+//     }
+//     axios.post(`${url}/jobs/${id}`, body, auth)
+//     .then(() => {        
+//         alert(`Removido com sucesso`) 
+//     })
+//     .catch(() => {
+//         alert('Erro ao remover serviço ao carrinho')
+//     })
+// }
 
