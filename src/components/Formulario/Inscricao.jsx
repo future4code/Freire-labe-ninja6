@@ -1,6 +1,7 @@
 import React from 'react';
-import { MultiSelect } from 'react-multi-select-component';
+import Select from "react-select"
 import { createJob } from '../../services/ConexoesApi';
+
 
 
 export default class Inscricao extends React.Component{
@@ -8,116 +9,123 @@ export default class Inscricao extends React.Component{
         inputTitulo:'',
         inputDescricao: '',
         inputPreco: '',
-        inputPgto: '',
         formaPgto: [],
         inputPrazo: '',
-
     };
-
-    pegarValorInputTitulo = (event) =>
+    
+   
+    handleInputTitulo = (event) =>
     this.setState({ inputTitulo: event.target.value });
     
-    pegarValorInputDescricao = (event) =>
+    handleInputDescricao = (event) =>
     this.setState({ inputDescricao: event.target.value });
 
-    pegarValorInputPreco = (event) =>
+    handleInputPreco = (event) =>
     this.setState({ inputPreco: event.target.value });
-    
-    pegarValorInputPgto = (event) =>
-    this.setState({ inputPgto: event.target.value });
 
-    pegarValorInputPrazo = (event) =>
+    handleInputPrazo = (event) =>
     this.setState({ inputPrazo: event.target.value });
 
-    // addPgto = () => {
-    //     const novaListaPgto = [...this.state.formaPgto, inputPgto];
-    //     this.setState({ formaPgto: novaListaPgto });  
-    //   };
-
       
-  deletarPgto = (item) => {
+    deletarPgto = (item) => {
     const pgtoFiltrados = this.state.formaPgto.filter((id) => {
       return id !== item;
-    });
+    })
     this.setState({ formaPgto: pgtoFiltrados });
   };
 
-//   renderizaPgto = () =>{
-//     this.state.formaPgto.map((item) => {
-//         return (
-//           <div className="container">
-//             <p>{item}</p>
-         
-//             <button onClick={() => this.deletarPgto(id)}>
-//               X
-//             </button>
-//           </div>
-//         )
-//   }
-// };
+  
+selectOption = (item) => {
+  const novaListaPgto = item.map(item =>{
+    return item.value
+  })
+  this.setState({formaPgto: novaListaPgto})
+  console.log(novaListaPgto);
+  console.log(this.state.formaPgto)
+}
+
+deletarPgto = (value) => {
+  const listaPgtoFiltrada = this.state.formaPgto.filter((item) => {
+    return item !== value;
+  });
+  this.setState({ formaPgto: listaPgtoFiltrada });
+};
+
 criarNinja = () => {
   createJob()
 }
 
+
 render(){
-    
-    const options = [
-      {
-        label: "Cartão", value: "cartao"
-      },
-      {
-        label: "Pix", value: "pix"
-      }
-    ]
-    const Example = () => {
-      const [selected, setSelected] = useState([]);
+  const options = [
+    {
+      label: "Cartão de Credito", value: "Cartão de Credito"
+    },
+    {
+      label: "Cartão de Debito", value: "Cartão de Débito"
+    },
+    {
+      label: "PayPal", value: "PayPal"
+    },
+    {
+      label: "Boleto", value: "Boleto"
+    },
+    {
+      label: "Pix", value: "Pix"
+    }
+  ];
+
+  const renderizaPgto = this.state.formaPgto.map((item) => {
+    return (
+      <div>
+        <p>{item}
+        <button 
+        onClick={() => this.deletarPgto(item)} >
+          x
+        </button>
+        </p>
+      </div>
+    );
+  });
+  
 
     return(
         <center>
-        <form action="">
-        <h2>Cadastre o seu serviço</h2>
-        <input type="text" placeholder='Título' />
-        <br />
-        <input type="text" placeholder='Descrição' />
-        <br />
-        <input type="number" placeholder='Preço'/>
-        <br />
-        Cartão de Credito <input type="checkbox" />
-        <br />
-        Cartão de Débito <input type="checkbox" />
-        <br />
-        PayPal <input type="checkbox" />
-        <br />
-        Boleto <input type="checkbox" />
-        <br />
-        Pix <input type="checkbox" />
-        <br /> 
-        <label for="pagamento">Forma de pagamento:</label>
-        {/* <input list="pagamentos" name="pagamento" id="pagamento" /> */}
-        {/* <select multiple id="pagamentos" >
-            <option id='1' value="Cartão de Credito">Cartão de Credito</option>
-            <option id='2' value="Cartão de Débito">Cartão de Débito</option>
-            <option id='3' value="PayPal">PayPal</option>
-            <option id='4' value="Boleto" >Boleto</option>
-            <option id='5' value="Pix" >Pix</option>
-        </select> */}
-        <MultiSelect
-        options={options}
-        value={selected}
-        onChange={setSelected}
-        labelledBy="Select"
-        />
-        <button onClick={this.addPgto}>Enviar</button>
-        <br />
-        <input type="date" />
-        <br />
         
-        </form>
+        <h2>Cadastre o seu serviço</h2>
+        <input type="text" 
+        placeholder='Título' 
+        value={this.state.inputTitulo} 
+        onChange={this.handleInputTitulo}/>
+        <br />
+        <input type="text" 
+        placeholder='Descrição' 
+        value={this.state.inputDescricao} 
+        onChange={this.handleInputDescricao}/>
+        <br />
+        <input type="number" 
+        placeholder='Preço' 
+        value={this.state.inputPreco}
+        onChange={this.handleInputPreco}/>
+        <br />
+        <Select
+          options={options}
+          isMulti
+          onChange={(item) => this.selectOption(item)}
+        />
+        <button onClick={renderizaPgto}>Enviar</button>
+        <br />
+        <input type="date" 
+        value={this.state.inputPrazo}
+        onChange={this.handleInputPrazo}/>
+        <br />
+        {renderizaPgto}
+        
         <button onClick={() => this.criarNinja()}>Cadastrar Serviço</button>
+      
         </center>
         
 
     )
 }
 } 
-}
