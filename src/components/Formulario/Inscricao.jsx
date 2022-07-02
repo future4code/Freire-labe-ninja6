@@ -8,7 +8,7 @@ export default class Inscricao extends React.Component{
     state = {
         inputTitulo:'',
         inputDescricao: '',
-        inputPreco: '',
+        inputPreco: 0,
         formaPgto: [],
         inputPrazo: '',
     };
@@ -37,13 +37,13 @@ export default class Inscricao extends React.Component{
 }
 
 
-criarNinja = () => {
-  createJob()
+criarNinja = (title, description, price, payment, date) => {
+  createJob(title, description, price, payment, date)
 }
 
 
 render(){
-
+  console.log(typeof this.state.inputPreco)
   const options = [
     {
       label: "Cartão de Credito", value: "Cartão de Credito"
@@ -85,15 +85,17 @@ render(){
           isMulti
           onChange={(item) => this.selectOption(item)}
         />
-        <button onClick={renderizaPgto}>Enviar</button>
         <br />
         <input type="date" 
         value={this.state.inputPrazo}
         onChange={this.handleInputPrazo}/>
         <br />
-        {renderizaPgto}
         
-        <button onClick={() => this.criarNinja()}>Cadastrar Serviço</button>
+        <button 
+        onClick={() => this.criarNinja(this.state.inputTitulo, this.state.inputDescricao, this.state.inputPreco, this.state.formaPgto, this.state.inputPrazo)}
+        >
+          Cadastrar Serviço
+        </button>
       
         </center>
         

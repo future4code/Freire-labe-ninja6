@@ -58,7 +58,11 @@ export default class App extends React.Component {
                     />
                 </DivBotao>
                 <hr />
-                <CardServico cardAdicionou={this.atualizaCarrinho} atualizaComponente={this.state.atualizaComponente} concluido={this.concluido} />
+                <CardServico 
+                cardAdicionou={this.atualizaCarrinho} 
+                atualizaComponente={this.state.atualizaComponente} 
+                concluido={this.concluido}
+                />
                 {/* ATÉ AQUI */}
 
                 {/* <CardServico/> */}
