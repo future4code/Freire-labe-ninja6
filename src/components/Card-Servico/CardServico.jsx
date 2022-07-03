@@ -63,8 +63,8 @@ export default class CardServico extends React.Component {
     }
   }
 
-  passaIDDetalhe = (id) => {
-    this.setState({idDetalhe: id})
+  // passaIDDetalhe = (id) => {
+  //   this.setState({idDetalhe: id})
   }
 
   render() {
@@ -109,7 +109,7 @@ export default class CardServico extends React.Component {
             Prazo: {today}, Preço: R${servico.price}
           </p>
           <div>
-            <button onClick={() => this.passaIDDetalhe(servico.id)}>
+            <button onClick={() => this.props.botaoDetalhe(servico.id)}>
               Detalhes
             </button>
             <button

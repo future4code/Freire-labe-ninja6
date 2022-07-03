@@ -23,23 +23,32 @@ export default class App extends React.Component {
     state = {
         carrinhoVisivel: false,
         atualizaComponente: false,
-        // telaAtual: 'home'
+        telaAtual: 'home',
+        idServico: ''
     };
 
     selecionaPagina = () => {
-        // switch(this.state.telaAtual){
+        switch(this.state.telaAtual){
           
-        //     case 'inscricao':
-        //         return <Inscricao/>;
-        //     case 'serviços':
-        //         return <CardServico/>;
-        //     case 'detalhes':
-        //         return <Detalhes/>;
-        //     default:
-        //         return <Home/>
-        // }
+            case 'inscricao':
+                return <Inscricao/>;
+            case 'serviços':
+                return <CardServico botaoDetalhe= {this.irParaDatalhes}/>;
+            case 'detalhes':
+                return <Detalhes  id={this.state.idServico}  botaoVoltar = {this.irParaServicos}/>;
+            default:
+                return <Home/>
+        }
 
     };
+
+    irParaDatalhes = (id) => {
+        this.setState({telaAtual: 'detalhes', idServico: id})
+    }
+
+    irParaServicos = () => {
+        this.setState({telaAtual: 'servicos', idServico: ''})
+    }
     exibeCarrinho = () => {
         this.setState({ carrinhoVisivel: !this.state.carrinhoVisivel });
     };
