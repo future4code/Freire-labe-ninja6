@@ -5,30 +5,29 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import styled from 'styled-components';
 
-const Container = styled.div`
-display: grid;
-border: 1px solid black;
-height: 100vh;
-grid-template-rows: 100px 1fr 100px;
-grid-template-areas: "h h h"
-                      ; 
 
-@media screen and (min-device-width: 320px) and (max-device-width: 1024px) {
-width: 100vw;
-height: 100vh;
-    }                      
-                                      
-`
 const Header = styled.header`
 display: flex;
 justify-content: space-between;
+padding: 10px 30px;
 align-items: center;
-grid-area: h;
 background-color: #fe7e01;
 `
+const Logo = styled.div`
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    &:hover {
+        background-color: #d86c01;
+    }
+`
 const Img = styled.img`
-width: 50px;
-margin-left: 20px;
+    width: 50px;
 `
 
 export default class HeaderEFooter extends React.Component {
@@ -36,26 +35,15 @@ export default class HeaderEFooter extends React.Component {
 
     render() {
         return (
-            <Container>
+            <div>
                 <Header>
-                    <div>
+                    <Logo onClick={this.props.voltarParaHome}>
                         <Img src={Ninja} />
-                        <p> Labeninjas </p>
-                    </div>
-
-                    <Box
-                        component="form"
-                        sx={{
-                            '& > :not(style)': { m: 1, width: '24ch' },
-                        }}
-                        noValidate
-                        autoComplete="off"
-                    >
-                        <TextField id="outlined-basic" label="Pesquisa" variant="outlined" />
-                    </Box>
-                    <IconButtons />
+                        <h1>Labeninjas</h1>
+                    </Logo>
+                    <IconButtons clicouCarrinho={this.props.clicouCarrinho}/>
                 </Header>
-            </Container>
+            </div>
 
         )
 
