@@ -79,7 +79,7 @@ export default class HeaderEFooter extends React.Component {
     return (
 
 
-      <Container>
+      <div>
 
         <Footer>
 
@@ -101,7 +101,7 @@ export default class HeaderEFooter extends React.Component {
 
         </Footer>
 
-      </Container>
+      </div>
 
 
     )

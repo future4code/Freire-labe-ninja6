@@ -4,7 +4,8 @@ export const BalaoCarrinho = styled.div`
   display: ${({ mostrar }) => (mostrar ? "flex" : "none")};
   flex-direction: column;
   position: absolute;
-  top: 45px;
+  z-index: 1;
+  top: 56px;
   right: 20px;
   left: auto;
   min-height: 100px;

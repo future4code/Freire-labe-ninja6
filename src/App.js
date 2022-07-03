@@ -6,20 +6,14 @@ import Inscricao from "./components/Formulario/Inscricao";
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
+import Detalhes from "./components/Detalhes-Servico/Detalhes";
 
-
-
-// CÓDIGO TESTE COM O CARRINHO
-// const DivBotao = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   padding: 15px 15px;
-// `;
-// ATÉ AQUI
+const Corpo = styled.div`
+  min-height: 81vh;
+`
 
 export default class App extends React.Component {
 
-    // CÓDIGO TESTE COM O CARRINHO
     state = {
         carrinhoVisivel: false,
         atualizaComponente: false,
@@ -69,21 +63,64 @@ export default class App extends React.Component {
     //   }
     // };
 
-    // ATÉ AQUI
-
     render() {
       console.log(this.state.telaAtual)
       let telaExibida = ''
       switch(this.state.telaAtual){
         
         case 'inscricao':
-            telaExibida = <Inscricao voltarHome={this.irParaHome}/>;
+            telaExibida = <div>
+              <Header voltarParaHome={this.irParaHome} clicouCarrinho={this.exibeCarrinho}/>
+              <Carrinho
+              mostrar={this.state.carrinhoVisivel}
+              fechar={this.exibeCarrinho}
+              carrinhoExcluiu={this.atualizaCard}
+              atualizaComponente={this.state.atualizaComponente}
+              concluido={this.concluido}
+              />
+              <Corpo>
+                <Inscricao voltarHome={this.irParaHome}/>
+              </Corpo>
+              <Footer/>
+            </div>;
             break;
+
         case 'servicos':
-            telaExibida = <CardServico botaoDetalhe={this.irParaDatalhes}/>;
+            telaExibida = <div>
+              <Header voltarParaHome={this.irParaHome} clicouCarrinho={this.exibeCarrinho}/>
+              <Carrinho
+              mostrar={this.state.carrinhoVisivel}
+              fechar={this.exibeCarrinho}
+              carrinhoExcluiu={this.atualizaCard}
+              atualizaComponente={this.state.atualizaComponente}
+              concluido={this.concluido}
+              />
+              <Corpo>
+                <CardServico botaoDetalhe={this.irParaDatalhes}
+              cardAdicionou={this.atualizaCarrinho} 
+              atualizaComponente={this.state.atualizaComponente} 
+              concluido={this.concluido}
+              />
+              </Corpo> 
+            <Footer/>
+            </div>;
             break;
+
         case 'detalhes':
-            telaExibida = <Detalhes  id={this.state.idServico}  botaoVoltar = {this.irParaServicos}/>;
+            telaExibida = <div>
+              <Header voltarParaHome={this.irParaHome} clicouCarrinho={this.exibeCarrinho}/>
+              <Carrinho
+              mostrar={this.state.carrinhoVisivel}
+              fechar={this.exibeCarrinho}
+              carrinhoExcluiu={this.atualizaCard}
+              atualizaComponente={this.state.atualizaComponente}
+              concluido={this.concluido}
+              />
+              <Corpo>
+                <Detalhes  id={this.state.idServico}  botaoVoltar = {this.irParaServicos}/>
+              </Corpo>
+              <Footer/>
+            </div>;
             break;
         case 'home':
             telaExibida = <Home botaoContratarNinja={this.irParaServicos} botaoSerUmNinja={this.irParaFormulario} />
@@ -93,14 +130,8 @@ export default class App extends React.Component {
             break;
     }
         return (
-            <div>
-                
-                <Header/>
-                
-
-                
+            <div>    
                 {telaExibida} 
-                <Footer/>
                 {/* CÓDIGO TESTE COM O CARRINHO */}
                 {/* <DivBotao>
                     <button>Logo</button>
