@@ -65,7 +65,7 @@ export default class CardServico extends React.Component {
 
   // passaIDDetalhe = (id) => {
   //   this.setState({idDetalhe: id})
-  }
+  //}
 
   render() {
     console.log("loop")
@@ -138,7 +138,6 @@ export default class CardServico extends React.Component {
         />
         
         <CardContainer>{servicos}</CardContainer>
-        {/* <Detalhes idServico={this.state.idDetalhe}/> */}
       </Div>
     );
   }

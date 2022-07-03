@@ -39,6 +39,11 @@ export default class Inscricao extends React.Component{
 
 criarNinja = (title, description, price, payment, date) => {
   createJob(title, description, price, payment, date)
+  this.setState({ inputTitulo: '' });
+  this.setState({ inputDescricao: '' });
+  this.setState({ inputPreco: 0 });
+  this.setState({ formaPgto: [] });
+  this.setState({ inputPrazo: '' });
 }
 
 
@@ -95,6 +100,9 @@ render(){
         onClick={() => this.criarNinja(this.state.inputTitulo, this.state.inputDescricao, this.state.inputPreco, this.state.formaPgto, this.state.inputPrazo)}
         >
           Cadastrar Serviço
+        </button>
+        <button onClick={this.props.voltarHome}>
+          Voltar
         </button>
       
         </center>
