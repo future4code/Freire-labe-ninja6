@@ -18,21 +18,15 @@ export const auth = {
 //     })
 // }
 
-export const createJob = () => {
-    // const body = {
-    //     title: title,
-    //     description: description,
-    //     price: price,
-    //     paymentMethods: payment,
-    //     dueDate: date
-    // }
+export const createJob = (title, description, price, payment, date) => {
     const body = {
-        title: "Back end",
-        description: "Faço teu site",
-        price: 50,
-        paymentMethods: ["Cartão de Crédito", "Pix"],
-        dueDate: "2023-12-30"
+        title: title,
+        description: description,
+        price: Number(price),
+        paymentMethods: payment,
+        dueDate: date
     }
+
     axios
     .post(`${url}/jobs`, body, auth)
     .then(() => {
@@ -40,7 +34,7 @@ export const createJob = () => {
     })
     .catch((error) => {
 
-        console.log(error)
+        alert(error.message)
     })
 }
 

@@ -19,34 +19,88 @@ import Home from './components/Home/Home';
 
 export default class App extends React.Component {
 
-    // // CÓDIGO TESTE COM O CARRINHO
-    // state = {
-    //     carrinhoVisivel: false,
-    //     atualizaComponente: false
+    // CÓDIGO TESTE COM O CARRINHO
+    state = {
+        carrinhoVisivel: false,
+        atualizaComponente: false,
+        telaAtual: 'home',
+        idServico: ''
+    };
+
+    
+    irParaHome = () => {
+      this.setState({telaAtual: 'home'})
+    }
+    irParaDatalhes = (id) => {
+        this.setState({telaAtual: 'detalhes', idServico: id})
+    }
+
+    irParaFormulario = () => {
+      this.setState({telaAtual: 'inscricao'})
+    }
+    irParaServicos = () => {
+        this.setState({telaAtual: 'servicos', idServico: ''})
+    }
+    exibeCarrinho = () => {
+        this.setState({ carrinhoVisivel: !this.state.carrinhoVisivel });
+    };
+    atualizaCard = () => {
+        this.setState({ atualizaComponente: true })
+    }
+    atualizaCarrinho = () => {
+        this.setState({ atualizaComponente: true })
+    }
+    concluido = () => {
+        this.setState({ atualizaComponente: false })
+    }
+    // selecionaPagina = () => {
+    //   switch(this.state.telaAtual){
+        
+    //       case 'inscricao':
+    //           return <Inscricao/>;
+    //       case 'serviços':
+    //           return <CardServico botaoDetalhe= {this.irParaDatalhes}/>;
+    //       case 'detalhes':
+    //           return <Detalhes  id={this.state.idServico}  botaoVoltar = {this.irParaServicos}/>;
+    //       case 'home':
+    //           return <Home/>
+    //       default:
+    //           return <Home/>
+    //   }
     // };
-    // exibeCarrinho = () => {
-    //     this.setState({ carrinhoVisivel: !this.state.carrinhoVisivel });
-    // };
-    // atualizaCard = () => {
-    //     this.setState({ atualizaComponente: true })
-    // }
-    // atualizaCarrinho = () => {
-    //     this.setState({ atualizaComponente: true })
-    // }
-    // concluido = () => {
-    //     this.setState({ atualizaComponente: false })
-    // }
-    // // ATÉ AQUI
+
+    // ATÉ AQUI
 
     render() {
+      console.log(this.state.telaAtual)
+      let telaExibida = ''
+      switch(this.state.telaAtual){
+        
+        case 'inscricao':
+            telaExibida = <Inscricao voltarHome={this.irParaHome}/>;
+            break;
+        case 'servicos':
+            telaExibida = <CardServico botaoDetalhe={this.irParaDatalhes}/>;
+            break;
+        case 'detalhes':
+            telaExibida = <Detalhes  id={this.state.idServico}  botaoVoltar = {this.irParaServicos}/>;
+            break;
+        case 'home':
+            telaExibida = <Home botaoContratarNinja={this.irParaServicos} botaoSerUmNinja={this.irParaFormulario} />
+            break;
+        default:
+            telaExibida = <Home botaoContratarNinja={this.irParaServicos} botaoSerUmNinja={this.irParaFormulario} />
+            break;
+    }
         return (
             <div>
-                <>
-                {/* <Footer/> */}
-                {/* <Home/> */}
+                
                 <Header/>
-                </>
+                
 
+                
+                {telaExibida} 
+                <Footer/>
                 {/* CÓDIGO TESTE COM O CARRINHO */}
                 {/* <DivBotao>
                     <button>Logo</button>
@@ -60,13 +114,16 @@ export default class App extends React.Component {
                     />
                 </DivBotao>
                 <hr />
-                <CardServico cardAdicionou={this.atualizaCarrinho} 
-                atualizaComponente={this.state.atualizaComponente}
-                 concluido={this.concluido} />
+                <CardServico 
+                cardAdicionou={this.atualizaCarrinho} 
+                atualizaComponente={this.state.atualizaComponente} 
+                concluido={this.concluido}
+                /> */}
                 {/* ATÉ AQUI */}
 
                 {/* <CardServico/> */}
-                {/* <Inscricao /> */}
+                {/* <Detalhes/>
+                <Inscricao /> */}
             </div>
         )
     }
