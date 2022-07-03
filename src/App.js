@@ -27,25 +27,17 @@ export default class App extends React.Component {
         idServico: ''
     };
 
-    selecionaPagina = () => {
-        switch(this.state.telaAtual){
-          
-            case 'inscricao':
-                return <Inscricao/>;
-            case 'serviços':
-                return <CardServico botaoDetalhe= {this.irParaDatalhes}/>;
-            case 'detalhes':
-                return <Detalhes  id={this.state.idServico}  botaoVoltar = {this.irParaServicos}/>;
-            default:
-                return <Home/>
-        }
-
-    };
-
+    
+    irParaHome = () => {
+      this.setState({telaAtual: 'home'})
+    }
     irParaDatalhes = (id) => {
         this.setState({telaAtual: 'detalhes', idServico: id})
     }
 
+    irParaFormulario = () => {
+      this.setState({telaAtual: 'inscricao'})
+    }
     irParaServicos = () => {
         this.setState({telaAtual: 'servicos', idServico: ''})
     }
@@ -61,18 +53,56 @@ export default class App extends React.Component {
     concluido = () => {
         this.setState({ atualizaComponente: false })
     }
+    // selecionaPagina = () => {
+    //   switch(this.state.telaAtual){
+        
+    //       case 'inscricao':
+    //           return <Inscricao/>;
+    //       case 'serviços':
+    //           return <CardServico botaoDetalhe= {this.irParaDatalhes}/>;
+    //       case 'detalhes':
+    //           return <Detalhes  id={this.state.idServico}  botaoVoltar = {this.irParaServicos}/>;
+    //       case 'home':
+    //           return <Home/>
+    //       default:
+    //           return <Home/>
+    //   }
+    // };
+
     // ATÉ AQUI
 
     render() {
+      console.log(this.state.telaAtual)
+      let telaExibida = ''
+      switch(this.state.telaAtual){
+        
+        case 'inscricao':
+            telaExibida = <Inscricao voltarHome={this.irParaHome}/>;
+            break;
+        case 'servicos':
+            telaExibida = <CardServico botaoDetalhe={this.irParaDatalhes}/>;
+            break;
+        case 'detalhes':
+            telaExibida = <Detalhes  id={this.state.idServico}  botaoVoltar = {this.irParaServicos}/>;
+            break;
+        case 'home':
+            telaExibida = <Home botaoContratarNinja={this.irParaServicos} botaoSerUmNinja={this.irParaFormulario} />
+            break;
+        default:
+            telaExibida = <Home botaoContratarNinja={this.irParaServicos} botaoSerUmNinja={this.irParaFormulario} />
+            break;
+    }
         return (
             <div>
                 {/* <>
                 <HeaderEFooter/>
                 <Home/>
                 </> */}
-
+                
+                {telaExibida} 
+                
                 {/* CÓDIGO TESTE COM O CARRINHO */}
-                <DivBotao>
+                {/* <DivBotao>
                     <button>Logo</button>
                     <button onClick={this.exibeCarrinho}>Carrinho</button>
                     <Carrinho
@@ -88,12 +118,12 @@ export default class App extends React.Component {
                 cardAdicionou={this.atualizaCarrinho} 
                 atualizaComponente={this.state.atualizaComponente} 
                 concluido={this.concluido}
-                />
+                /> */}
                 {/* ATÉ AQUI */}
 
                 {/* <CardServico/> */}
-                <Detalhes/>
-                <Inscricao />
+                {/* <Detalhes/>
+                <Inscricao /> */}
             </div>
         )
     }

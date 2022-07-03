@@ -14,7 +14,7 @@ export default class Filter extends React.Component {
       <Div className="App">
         <ThemeProvider theme={theme}>
           <TextField
-            label="valor mínimo"
+            label="Valor mínimo"
             variant="outlined"
             type="number"
             size="small"
@@ -27,7 +27,7 @@ export default class Filter extends React.Component {
             onChange={this.props.onChangeMaxValue}
             value={this.props.maxValue}
             id="outlined-basic"
-            label="valor máximo"
+            label="Valor máximo"
             variant="outlined"
           />
 

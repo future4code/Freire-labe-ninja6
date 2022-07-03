@@ -108,12 +108,12 @@ export default class Home extends React.Component {
                     </TextoPrincipal>
 
                     <Div>
-                        <BotaoLinkSeja className="btn">
+                        <BotaoLinkSeja className="btn" onClick={this.props.botaoSerUmNinja}>
                         <strong><TextoButton>Seja um</TextoButton></strong>
                         <strong><TextoButton> Ninja</TextoButton></strong>
                         </BotaoLinkSeja>
 
-                        <BotaoLinkContrate className="btn">
+                        <BotaoLinkContrate className="btn" onClick={this.props.botaoContratarNinja}>
                         <strong><TextoButton>Contrate um</TextoButton></strong>
                         <strong><TextoButton>Ninja</TextoButton></strong>
                         </BotaoLinkContrate>
