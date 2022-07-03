@@ -3,18 +3,18 @@ import styled from "styled-components";
 import Carrinho from "./components/Carrinho/Carrinho";
 import CardServico from "./components/Card-Servico/CardServico";
 import Inscricao from "./components/Formulario/Inscricao";
-import Home from './components/Header-Footer-Home/Home'
-import HeaderEFooter from './components/Header-Footer-Home/HeaderEFooter'
-import Detalhes from "./components/Detalhes-Servico/Detalhes";
+import Footer from './components/Footer/Footer';
+import Header from './components/Header/Header';
+import Home from './components/Home/Home';
 
 
 
 // CÓDIGO TESTE COM O CARRINHO
-const DivBotao = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 15px;
-`;
+// const DivBotao = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   padding: 15px 15px;
+// `;
 // ATÉ AQUI
 
 export default class App extends React.Component {
@@ -94,13 +94,13 @@ export default class App extends React.Component {
     }
         return (
             <div>
-                {/* <>
-                <HeaderEFooter/>
-                <Home/>
-                </> */}
+                
+                <Header/>
+                
+
                 
                 {telaExibida} 
-                
+                <Footer/>
                 {/* CÓDIGO TESTE COM O CARRINHO */}
                 {/* <DivBotao>
                     <button>Logo</button>

@@ -1,12 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Ninja from './img/ninja_1.png';
-import Face from './img/facebook.png';
-import Instagram from './img/instagram.png';
-import Whatsapp from './img/whatsapp.png';
-import IconButtons from './IconButtons';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import Face from '../img/facebook.png';
+import Instagram from '../img/instagram.png';
+import Whatsapp from '../img/whatsapp.png';
 // import axios from "axios"
 
 const Container = styled.div`
@@ -22,16 +18,7 @@ grid-template-areas: "h h h"
 width: 100vw;
 height: 100vh;
 
-    }                      
-                                      
-`
-
-const Header = styled.header`
-display: flex;
-justify-content: space-between;
-align-items: center;
-grid-area: h;
-background-color: #fe7e01;
+    }                                                        
 `
 
 const Footer = styled.footer`
@@ -45,10 +32,8 @@ grid-template-columns: 1fr 1fr 1fr ;
    display: grid;
    grid-template-columns: 2fr 1fr;
 
- 
     }
 `
-
 
 const RedesSociais = styled.div`
 font-size: 12px;
@@ -58,11 +43,6 @@ margin-top: 45px;
    font-size: 12px;
    margin-top: 25%;
     }
-`
-
-const Img = styled.img`
-width: 50px;
-margin-left: 20px;
 `
 
 const ImgLink = styled.a`
@@ -97,30 +77,14 @@ export default class HeaderEFooter extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Header>
-          <div>
-            <Img src={Ninja} />
-            <p> Labeninjas </p>
-          </div>
 
-          <Box
-            component="form"
-            sx={{
-              '& > :not(style)': { m: 1, width: '24ch' },
-            }}
-            noValidate
-            autoComplete="off"
-          >
-            <TextField id="outlined-basic" label="Pesquisa" variant="outlined" />
-          </Box>
-          <IconButtons />
-        </Header>
+
+      <Container>
 
         <Footer>
 
           <ImgLink>
-            <TextoEquipe>--- Equipe de desenvolvimento ---</TextoEquipe>
+            <TextoEquipe> --- Equipe de desenvolvimento --- </TextoEquipe>
             <Imagem href="https://www.linkedin.com/in/peterson-santana-maia-5291bb215/" target="_blank"><img width='40px' src='https://media-exp1.licdn.com/dms/image/C4E03AQF5FCU8ud5VuQ/profile-displayphoto-shrink_200_200/0/1624194324042?e=1661990400&v=beta&t=aU4aVRjFGNDdp4iAPCsR7P9ssvTrHrphOagunlFqP1o' alt="" /></Imagem>
             <Imagem href="" target="_blank"><img width='40px' src='https://media-exp1.licdn.com/dms/image/C4E03AQF5FCU8ud5VuQ/profile-displayphoto-shrink_200_200/0/1624194324042?e=1661990400&v=beta&t=aU4aVRjFGNDdp4iAPCsR7P9ssvTrHrphOagunlFqP1o' alt="" /></Imagem>
             <Imagem href="" target="_blank"><img width='40px' src='https://media-exp1.licdn.com/dms/image/C4E03AQF5FCU8ud5VuQ/profile-displayphoto-shrink_200_200/0/1624194324042?e=1661990400&v=beta&t=aU4aVRjFGNDdp4iAPCsR7P9ssvTrHrphOagunlFqP1o' alt="" /></Imagem>

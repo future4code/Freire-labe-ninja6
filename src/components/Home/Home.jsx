@@ -1,7 +1,7 @@
 import React from "react";
 // import HeaderEFooter from "./componentes/HeaderEFooter"
 import styled from "styled-components";
-import Ninja from './img/ninja_1.png';
+import Ninja from '../img/ninja_1.png';
 import './style.css';
 
 
