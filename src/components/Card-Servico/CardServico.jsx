@@ -63,9 +63,9 @@ export default class CardServico extends React.Component {
     }
   }
 
-  // passaIDDetalhe = (id) => {
-  //   this.setState({idDetalhe: id})
-  // }
+  passaIDDetalhe = (id) => {
+    this.setState({idDetalhe: id})
+  }
 
   render() {
     console.log("loop")

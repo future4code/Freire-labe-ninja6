@@ -5,6 +5,7 @@ import CardServico from "./components/Card-Servico/CardServico";
 import Inscricao from "./components/Formulario/Inscricao";
 import Home from './components/Header-Footer-Home/Home'
 import HeaderEFooter from './components/Header-Footer-Home/HeaderEFooter'
+import Detalhes from "./components/Detalhes-Servico/Detalhes";
 
 
 
@@ -21,7 +22,23 @@ export default class App extends React.Component {
     // CÓDIGO TESTE COM O CARRINHO
     state = {
         carrinhoVisivel: false,
-        atualizaComponente: false
+        atualizaComponente: false,
+        // telaAtual: 'home'
+    };
+
+    selecionaPagina = () => {
+        // switch(this.state.telaAtual){
+          
+        //     case 'inscricao':
+        //         return <Inscricao/>;
+        //     case 'serviços':
+        //         return <CardServico/>;
+        //     case 'detalhes':
+        //         return <Detalhes/>;
+        //     default:
+        //         return <Home/>
+        // }
+
     };
     exibeCarrinho = () => {
         this.setState({ carrinhoVisivel: !this.state.carrinhoVisivel });
@@ -66,6 +83,7 @@ export default class App extends React.Component {
                 {/* ATÉ AQUI */}
 
                 {/* <CardServico/> */}
+                <Detalhes/>
                 <Inscricao />
             </div>
         )
