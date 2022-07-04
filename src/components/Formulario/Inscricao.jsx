@@ -1,6 +1,10 @@
 import React from 'react';
 import Select from "react-select"
-import { createJob } from '../../services/ConexoesApi';
+import styled from 'styled-components';
+import { createJob } from '../../services/ConexoesApi';  
+import { Inscreve } from "./styled";
+import './Select.css'
+
 
 
 
@@ -68,7 +72,7 @@ render(){
   ];
 
     return(
-       <center>
+       <Inscreve>
         <h2>Cadastre o seu serviço</h2>
         <input type="text" 
         placeholder='Título' 
@@ -85,27 +89,35 @@ render(){
         value={this.state.inputPreco}
         onChange={this.handleInputPreco}/>
         <br />
-        <Select
-          options={options}
-          isMulti
-          onChange={(item) => this.selectOption(item)}
-        />
-        <br />
         <input type="date" 
         value={this.state.inputPrazo}
         onChange={this.handleInputPrazo}/>
+       
         <br />
+       
+        <div>
+        <Select
+          className='select'
+          options={options}
+          isMulti={true}
+          placeholder='Forma de pagamento'      
+          onChange={(item) => this.selectOption(item)}
+        />
+        </div>
+         <br />
+        
         
         <button 
         onClick={() => this.criarNinja(this.state.inputTitulo, this.state.inputDescricao, this.state.inputPreco, this.state.formaPgto, this.state.inputPrazo)}
         >
           Cadastrar Serviço
         </button>
+        <br />
         <button onClick={this.props.voltarHome}>
           Voltar
         </button>
       
-        </center>
+        </Inscreve>
         
 
     )
