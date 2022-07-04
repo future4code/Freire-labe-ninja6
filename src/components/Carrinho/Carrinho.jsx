@@ -24,6 +24,7 @@ export default class Carrinho extends React.Component {
           })
           this.setState({ itensCarrinho: itensAdicionados });
           this.props.carrinhoExcluiu();
+          
         });
       });
     }
@@ -35,9 +36,9 @@ export default class Carrinho extends React.Component {
         removeFromCart(item.id).then((result) =>{
           this.setState({ itensCarrinho: [] });
           this.props.carrinhoExcluiu();
+          this.props.esvaziaCarrinho();
         })
       }
-      this.props.carrinhoExcluiu();
     }
   };
 
@@ -48,7 +49,7 @@ export default class Carrinho extends React.Component {
         this.props.carrinhoExcluiu();
       })
     }
-    this.props.carrinhoExcluiu();
+    // this.props.carrinhoExcluiu();
     alert("Agradecemos a preferência! Em breve entraremos em contato!");
   };
 
@@ -60,7 +61,7 @@ export default class Carrinho extends React.Component {
       this.setState({ itensCarrinho: itensAdicionados });
     });
   }
-
+  
   componentDidUpdate() {
     if (this.props.atualizaComponente) {
       getAllJobs().then((result) => {
@@ -69,12 +70,12 @@ export default class Carrinho extends React.Component {
         })
         this.setState({ itensCarrinho: itensAdicionados });
         this.props.concluido()
+        
       })
     }
   }
 
   render() {
-    console.log(this.state.itensCarrinho)
     let itensExibidos = "";
     if (this.state.itensCarrinho.length !== 0) {
       itensExibidos = this.state.itensCarrinho
