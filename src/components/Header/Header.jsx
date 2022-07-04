@@ -41,7 +41,7 @@ export default class HeaderEFooter extends React.Component {
                         <Img src={Ninja} />
                         <h1>Labeninjas</h1>
                     </Logo>
-                    <IconButtons clicouCarrinho={this.props.clicouCarrinho}/>
+                    <IconButtons clicouCarrinho={this.props.clicouCarrinho} itensNoCarrinho={this.props.itensNoCarrinho}/>
                 </Header>
             </div>
 
