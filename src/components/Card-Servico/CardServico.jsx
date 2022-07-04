@@ -72,7 +72,7 @@ export default class CardServico extends React.Component {
   //}
 
   render() {
-    console.log("loop")
+    
     const filteredJobs = this.state.servicos
       .filter((job) => {
         let minVal = this.state.minValue ? this.state.minValue : -Infinity;

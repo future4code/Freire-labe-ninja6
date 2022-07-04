@@ -55,7 +55,7 @@ export async function addToCart(id){
     try {
         await axios
         .post(`${url}/jobs/${id}`, body, auth)
-        alert('Adicionado')
+        alert('Serviço adicionado ao carrinho!')
     } catch (error) {
         alert('Erro')
     }

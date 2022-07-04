@@ -26,16 +26,18 @@ export default class App extends React.Component {
         itensNoCarrinho: 0
     };
 
-    
+    esvaziaCarrinho = () => {
+      this.setState({itensNoCarrinho: 0})
+    }
     irParaHome = () => {
-      this.setState({telaAtual: 'home'})
+        this.setState({telaAtual: 'home'})
     }
     irParaDatalhes = (id) => {
         this.setState({telaAtual: 'detalhes', idServico: id})
     }
 
     irParaFormulario = () => {
-      this.setState({telaAtual: 'inscricao'})
+        this.setState({telaAtual: 'inscricao'})
     }
     irParaServicos = () => {
         this.setState({telaAtual: 'servicos', idServico: ''})
@@ -54,24 +56,8 @@ export default class App extends React.Component {
     concluido = () => {
         this.setState({ atualizaComponente: false })
     }
-    // selecionaPagina = () => {
-    //   switch(this.state.telaAtual){
-        
-    //       case 'inscricao':
-    //           return <Inscricao/>;
-    //       case 'serviços':
-    //           return <CardServico botaoDetalhe= {this.irParaDatalhes}/>;
-    //       case 'detalhes':
-    //           return <Detalhes  id={this.state.idServico}  botaoVoltar = {this.irParaServicos}/>;
-    //       case 'home':
-    //           return <Home/>
-    //       default:
-    //           return <Home/>
-    //   }
-    // };
 
     render() {
-      console.log(this.state.telaAtual)
       let telaExibida = ''
       switch(this.state.telaAtual){
         
@@ -84,6 +70,7 @@ export default class App extends React.Component {
               carrinhoExcluiu={this.atualizaCard}
               atualizaComponente={this.state.atualizaComponente}
               concluido={this.concluido}
+              esvaziaCarrinho={this.esvaziaCarrinho}
               />
               <Corpo>
                 <Inscricao voltarHome={this.irParaHome}/>
@@ -101,6 +88,7 @@ export default class App extends React.Component {
               carrinhoExcluiu={this.atualizaCard}
               atualizaComponente={this.state.atualizaComponente}
               concluido={this.concluido}
+              esvaziaCarrinho={this.esvaziaCarrinho}
               />
               <Corpo>
                 <CardServico botaoDetalhe={this.irParaDatalhes}
@@ -122,6 +110,7 @@ export default class App extends React.Component {
               carrinhoExcluiu={this.atualizaCard}
               atualizaComponente={this.state.atualizaComponente}
               concluido={this.concluido}
+              esvaziaCarrinho={this.esvaziaCarrinho}
               />
               <Corpo>
                 <Detalhes  id={this.state.idServico}  botaoVoltar = {this.irParaServicos}/>
@@ -139,29 +128,6 @@ export default class App extends React.Component {
         return (
             <div>    
                 {telaExibida} 
-                {/* CÓDIGO TESTE COM O CARRINHO */}
-                {/* <DivBotao>
-                    <button>Logo</button>
-                    <button onClick={this.exibeCarrinho}>Carrinho</button>
-                    <Carrinho
-                        mostrar={this.state.carrinhoVisivel}
-                        fechar={this.exibeCarrinho}
-                        carrinhoExcluiu={this.atualizaCard}
-                        atualizaComponente={this.state.atualizaComponente}
-                        concluido={this.concluido}
-                    />
-                </DivBotao>
-                <hr />
-                <CardServico 
-                cardAdicionou={this.atualizaCarrinho} 
-                atualizaComponente={this.state.atualizaComponente} 
-                concluido={this.concluido}
-                /> */}
-                {/* ATÉ AQUI */}
-
-                {/* <CardServico/> */}
-                {/* <Detalhes/>
-                <Inscricao /> */}
             </div>
         )
     }
