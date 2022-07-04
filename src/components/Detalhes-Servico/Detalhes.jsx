@@ -1,6 +1,7 @@
 import React from "react";
 import axios from 'axios';
 import styled from "styled-components";
+import { Detalhei } from "./styled";
 
 const ItemLista = styled.li`
     width: fit-content;
@@ -40,23 +41,29 @@ export default class Detalhes extends React.Component{
             })
         } else {
             renderizaPgto = "Carregando..."
-        }
+        };
+        let today = new Date(this.state.servico.dueDate);
+      const dd = String(today.getDate()).padStart(2, "0");
+      const mm = String(today.getMonth() + 1).padStart(2, "0");
+      const yyyy = today.getFullYear();
+
+      today = dd + "/" + mm + "/" + yyyy;
         
         return(
-            <center>
+            <Detalhei>
                 <h2>{this.state.servico.title}</h2>
                 <h4>{this.state.servico.description}</h4>
                 <p>Preço: R${this.state.servico.price},00</p>
                 <p>
                     Pagamento:
-                    <ul>
+                    <div>
                         {renderizaPgto}
-                    </ul>   
+                    </div>   
                 </p>
-                <p>Até {this.state.servico.dueDate} </p>
+                <p>Até {today} </p>
                 
                 <button onClick={this.props.botaoVoltar}>Voltar para lista</button>
-            </center>
+            </Detalhei>
 
         )
     }
