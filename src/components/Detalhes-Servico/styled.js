@@ -6,7 +6,6 @@ export const Detalhei = styled.div`
 margin: auto;
 width: 30%;
 font-size: large;
-
 & button {
   margin: 10px;
 }
@@ -19,8 +18,4 @@ font-size: large;
 & li{
     margin: auto;
 }
-
-}
-  `
-
-  
+`

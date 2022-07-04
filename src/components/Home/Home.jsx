@@ -6,12 +6,15 @@ import './style.css';
 
 
 const Body = styled.body`
+height: 100vh;
+display: flex;
+flex-direction: column;
 text-align: center;
 background-color: #fe7e01;
 border: 1px solid black;
 align-items: center;
 text-align: center;
-height: 100vh;
+max-height: 100vh;
 @media screen and (min-device-width: 320px) and (max-device-width: 860px) {
     width: 100vw;
     }

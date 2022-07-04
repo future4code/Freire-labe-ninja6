@@ -8,6 +8,10 @@ import Header from './components/Header/Header';
 import Home from './components/Home/Home';
 import Detalhes from "./components/Detalhes-Servico/Detalhes";
 
+const Container = styled.div`
+  max-height: 100vh;
+`
+
 const Corpo = styled.div`
   min-height: 81vh;
 `
@@ -110,7 +114,7 @@ export default class App extends React.Component {
             break;
 
         case 'detalhes':
-            telaExibida = <div>
+            telaExibida = <Container>
               <Header voltarParaHome={this.irParaHome} clicouCarrinho={this.exibeCarrinho} itensNoCarrinho={this.state.itensNoCarrinho}/>
               <Carrinho
               mostrar={this.state.carrinhoVisivel}
@@ -123,7 +127,7 @@ export default class App extends React.Component {
                 <Detalhes  id={this.state.idServico}  botaoVoltar = {this.irParaServicos}/>
               </Corpo>
               <Footer/>
-            </div>;
+            </Container>;
             break;
         case 'home':
             telaExibida = <Home botaoContratarNinja={this.irParaServicos} botaoSerUmNinja={this.irParaFormulario} />

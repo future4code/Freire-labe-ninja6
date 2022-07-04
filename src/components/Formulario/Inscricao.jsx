@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { createJob } from '../../services/ConexoesApi';  
 import { Inscreve } from "./styled";
 import './Select.css'
-
+import { Button } from '@mui/material';
 
 
 
@@ -106,15 +106,38 @@ render(){
         </div>
          <br />
         
-        
-        <button 
-        onClick={() => this.criarNinja(this.state.inputTitulo, this.state.inputDescricao, this.state.inputPreco, this.state.formaPgto, this.state.inputPrazo)}
-        >
-          Cadastrar Serviço
-        </button>
+         <Button
+              variant="contained"
+              sx={{
+                backgroundColor: '#d86c01',
+                '&:hover': {
+                  backgroundColor: '#ab5500'
+                }        }}
+             
+               onClick={() => this.criarNinja(this.state.inputTitulo, this.state.inputDescricao, this.state.inputPreco, this.state.formaPgto, this.state.inputPrazo)}>
+              Cadastrar Serviço
+          </Button>
         <br />
+        <Button
+        sx={{
+          width: 'fit-content',
+          color: '#fbb34c',
+          borderColor: '#fbb34c',
+          marginTop: '10px',
+          marginBottom: '10px',
+          '&:hover': {
+            borderColor: '#d86c01',
+            color: '#d86c01',
+            backgroundColor: 'white'
+          }
+        }}
+        variant="outlined"              
+        onClick={this.props.voltarHome}>
+              Voltar
+            </Button>
+        
         <button onClick={this.props.voltarHome}>
-          Voltar
+          
         </button>
       
         </Inscreve>

@@ -1,13 +1,17 @@
 import React from "react";
 
 
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import IconButton from '@mui/material/IconButton';
+import Stack from '@mui/material/Stack';
+import { Button } from "@mui/material";
 import Filter from "../Filter/Filter";
 import { Card } from "./styled";
 import { CardContainer, Div } from "./styled";
 import { getAllJobs } from "../../services/ConexoesApi";
 import { addToCart } from "../../services/ConexoesApi";
 import { removeFromCart } from "../../services/ConexoesApi";
-import Detalhes from "../Detalhes-Servico/Detalhes";
+
 
 export default class CardServico extends React.Component {
   state = {
@@ -109,17 +113,47 @@ export default class CardServico extends React.Component {
             Prazo: {today}, Preço: R${servico.price}
           </p>
           <div>
-            <button onClick={() => this.props.botaoDetalhe(servico.id)}>
+            <Button
+              sx={{
+                width: 'fit-content',
+                border: '1px solid',
+                borderColor: '#fbb34c',
+                color: '#fbb34c',
+                marginTop: '10px',
+                marginBottom: '10px',
+                '&:hover': {
+                  borderColor: '#d86c01',
+                  color: '#d86c01',
+                  backgroundColor: '#fbb34c'
+                }
+        }}
+             
+            onClick={() => this.props.botaoDetalhe(servico.id)}>
               Detalhes
-            </button>
-            <button
+            </Button>
+            <IconButton 
+                      sx={{
+                        border: '1px',
+                        border: '1px solid',
+                        borderColor: '#fbb34c',              
+                        width: 'fit-content',
+                        color: '#fbb34c',
+                        marginTop: '10px',
+                        marginBottom: '10px',
+                        '&:hover': {
+                          borderColor: '#d86c01',
+                          color: 'black',
+                          backgroundColor: '#fbb34c'
+                        }
+                      }}
+              
               onClick={() => {
                 this.adicionarAoCarrinho(servico.id);
               }}
               disabled={servico.taken}
             >
-              Adicionar
-            </button>
+              <AddShoppingCartIcon/>
+            </IconButton>
           </div>
         </Card>
       );

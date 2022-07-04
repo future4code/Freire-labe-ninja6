@@ -2,6 +2,7 @@ import React from "react";
 import axios from 'axios';
 import styled from "styled-components";
 import { Detalhei } from "./styled";
+import { Button } from "@mui/material";
 
 const ItemLista = styled.li`
     width: fit-content;
@@ -62,7 +63,24 @@ export default class Detalhes extends React.Component{
                 </p>
                 <p>Até {today} </p>
                 
-                <button onClick={this.props.botaoVoltar}>Voltar para lista</button>
+                <Button
+              sx={{
+                width: 'fit-content',
+                border: '1px solid',
+                borderColor: '#fbb34c',
+                color: '#fbb34c',
+                marginTop: '10px',
+                marginBottom: '10px',
+                '&:hover': {
+                  borderColor: '#d86c01',
+                  color: '#d86c01',
+                  backgroundColor: '#fbb34c'
+                }
+        }}
+             
+                onClick={this.props.botaoVoltar}>
+              Voltar
+            </Button>
             </Detalhei>
 
         )
