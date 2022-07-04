@@ -18,7 +18,8 @@ export default class App extends React.Component {
         carrinhoVisivel: false,
         atualizaComponente: false,
         telaAtual: 'home',
-        idServico: ''
+        idServico: '',
+        itensNoCarrinho: 0
     };
 
     
@@ -40,9 +41,11 @@ export default class App extends React.Component {
     };
     atualizaCard = () => {
         this.setState({ atualizaComponente: true })
+        this.setState({ itensNoCarrinho: this.state.itensNoCarrinho - 1 })
     }
     atualizaCarrinho = () => {
         this.setState({ atualizaComponente: true })
+        this.setState({ itensNoCarrinho: this.state.itensNoCarrinho + 1 })
     }
     concluido = () => {
         this.setState({ atualizaComponente: false })
@@ -70,7 +73,7 @@ export default class App extends React.Component {
         
         case 'inscricao':
             telaExibida = <div>
-              <Header voltarParaHome={this.irParaHome} clicouCarrinho={this.exibeCarrinho}/>
+              <Header voltarParaHome={this.irParaHome} clicouCarrinho={this.exibeCarrinho} itensNoCarrinho={this.state.itensNoCarrinho}/>
               <Carrinho
               mostrar={this.state.carrinhoVisivel}
               fechar={this.exibeCarrinho}
@@ -87,7 +90,7 @@ export default class App extends React.Component {
 
         case 'servicos':
             telaExibida = <div>
-              <Header voltarParaHome={this.irParaHome} clicouCarrinho={this.exibeCarrinho}/>
+              <Header voltarParaHome={this.irParaHome} clicouCarrinho={this.exibeCarrinho} itensNoCarrinho={this.state.itensNoCarrinho}/>
               <Carrinho
               mostrar={this.state.carrinhoVisivel}
               fechar={this.exibeCarrinho}
@@ -108,7 +111,7 @@ export default class App extends React.Component {
 
         case 'detalhes':
             telaExibida = <div>
-              <Header voltarParaHome={this.irParaHome} clicouCarrinho={this.exibeCarrinho}/>
+              <Header voltarParaHome={this.irParaHome} clicouCarrinho={this.exibeCarrinho} itensNoCarrinho={this.state.itensNoCarrinho}/>
               <Carrinho
               mostrar={this.state.carrinhoVisivel}
               fechar={this.exibeCarrinho}

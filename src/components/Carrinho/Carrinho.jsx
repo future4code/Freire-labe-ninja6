@@ -1,67 +1,22 @@
 import React from "react";
 import { getAllJobs, removeFromCart } from "../../services/ConexoesApi";
-import { BalaoCarrinho, CardCarrinho, TituloCarrinho, BotaoEsvaziar, FinalCarrinho } from "./styles";
+import { BalaoCarrinho, CardCarrinho, TituloCarrinho, FinalCarrinho } from "./styles";
+import BotaoFechar from "./BotaoFechar";
+import BotaoExcluir from "./BotaoExcluir"
+import { Button } from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
 
-{/* 
-
-Fiz o componente com base nesse código comentado abaixo. 
-Há nesse código uma exemplo de como fazer o componente Carrinho aparecer e desaparecer da tela
-Os props do componente Carrinho são 'mostrar' e 'fechar' - linha 35 até linha 38
-
-import React from "react";
-import "./styles.css";
-import styled from "styled-components";
-import Carrinho from "./components/Carrinho";
-
-const DivBotao = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 15px;
-`;
-
-export default class App extends React.Component {
-  state = {
-    carrinhoVisivel: false
-  };
-
-  exibeCarrinho = () => {
-    this.setState({ carrinhoVisivel: !this.state.carrinhoVisivel });
-    console.log(this.state.carrinhoVisivel);
-  };
-
-  render() {
-    console.log(this.state.carrinhoVisivel);
-    return (
-      <div>
-        <DivBotao>
-          <button>Logo</button>
-          <button onClick={this.exibeCarrinho}>Carrinho</button>
-          <Carrinho
-            mostrar={this.state.carrinhoVisivel}
-            fechar={this.exibeCarrinho}
-          />
-        </DivBotao>
-        <hr />
-      </div>
-    );
-  }
-}
- */}
 export default class Carrinho extends React.Component {
   state = {
     itensCarrinho: []
   };
 
-  adicionaItemCarrinho = (id) => {
-    console.log("Adicionou");
-    // O this.state.itensCarrinho deve ser preenchido
-    // com uma consulta a API pelo ID fornecido pelo
-    //  componente Home
-  };
+  // adicionaItemCarrinho = (id) => {
+  //   console.log("Adicionou");
+  // };
 
   excluiItemCarrinho = (id) => {
     if (window.confirm("Tem certeza que deseja remover esse item?")) {
-      // O item deve ser excluído pelo ID, consertar quando conectar API
       removeFromCart(id).then(() => {
         getAllJobs().then((result) => {
           const itensAdicionados = result.filter((item) => {
@@ -76,12 +31,24 @@ export default class Carrinho extends React.Component {
 
   esvaziarCarrinho = () => {
     if (window.confirm("Deseja mesmo excluir todos os itens?")) {
-      this.setState({ itensCarrinho: [] });
+      for (let item of this.state.itensCarrinho) {
+        removeFromCart(item.id).then((result) =>{
+          this.setState({ itensCarrinho: [] });
+          this.props.carrinhoExcluiu();
+        })
+      }
+      this.props.carrinhoExcluiu();
     }
   };
 
   contratarServico = () => {
-    this.setState({ itensCarrinho: [] });
+    for (let item of this.state.itensCarrinho) {
+      removeFromCart(item.id).then((result) =>{
+        this.setState({ itensCarrinho: [] });
+        this.props.carrinhoExcluiu();
+      })
+    }
+    this.props.carrinhoExcluiu();
     alert("Agradecemos a preferência! Em breve entraremos em contato!");
   };
 
@@ -118,9 +85,7 @@ export default class Carrinho extends React.Component {
                 <span>{item.title}</span>
                 <span>R$ {item.price.toFixed(2).replace(".", ",")}</span>
               </div>
-              <button onClick={() => this.excluiItemCarrinho(item.id)}>
-                Excluir
-              </button>
+              <BotaoExcluir excluiItem={() => this.excluiItemCarrinho(item.id)}/>
             </CardCarrinho>
           );
         });
@@ -140,26 +105,51 @@ export default class Carrinho extends React.Component {
       <BalaoCarrinho mostrar={this.props.mostrar}>
         <TituloCarrinho>
           <span>Meu Carrinho</span>
-          <button onClick={this.props.fechar}>Fechar</button>
+          <BotaoFechar fechouCarrinho={this.props.fechar}/>
         </TituloCarrinho>
-        <hr />
 
         {itensExibidos}
-        <hr />
-        <BotaoEsvaziar
-          onClick={this.esvaziarCarrinho}
-          disabled={this.state.itensCarrinho.length === 0}
+        <Button
+        sx={{
+          width: 'fit-content',
+          color: '#fbb34c',
+          borderColor: '#fbb34c',
+          marginTop: '10px',
+          marginBottom: '10px',
+          '&:hover': {
+            borderColor: '#d86c01',
+            color: '#d86c01',
+            backgroundColor: 'white'
+          }
+        }}
+        variant="outlined" 
+        startIcon={<DeleteIcon />}
+        onClick={this.esvaziarCarrinho}
+        disabled={this.state.itensCarrinho.length === 0}
         >
           Esvaziar Carrinho
-        </BotaoEsvaziar>
+        </Button>
         <FinalCarrinho>
           <h3>Total: R$ {valorTotal.toFixed(2).replace(".", ",")}</h3>
-          <button
+          <Button 
+          variant="contained"
+          onClick={this.contratarServico}
+          disabled={this.state.itensCarrinho.length === 0}
+          sx={{
+            backgroundColor: '#d86c01',
+            '&:hover': {
+              backgroundColor: '#ab5500'
+            }
+          }}
+          >
+            Contratar
+          </Button>
+          {/* <button
             onClick={this.contratarServico}
             disabled={this.state.itensCarrinho.length === 0}
           >
             Contratar
-          </button>
+          </button> */}
         </FinalCarrinho>
       </BalaoCarrinho>
     );
